@@ -1,15 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import { Animated, Dimensions, ViewStyle } from "react-native";
+import { Animated, ViewStyle } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
 type ProgressCircleProps = {
-  progress: number; // 0-100
-  // widthPercent?: number; // 0-100
-  // heightPercent?: number; // 0-100
-  width?: number; // 0-100
-  height?: number; // 0-100
-  // strokePercent?: number; // 0-1 (proporción del width)
-  strokeWidth?: number; // 0-1 (proporción del width)
+  progress: number; // 0 - 100
+  width: number; // ancho del SVG
+  height: number; // alto del SVG
+  strokeWidth?: number; // grosor del trazo
   color?: string;
   backgroundColor?: string;
   style?: ViewStyle;
@@ -17,11 +14,8 @@ type ProgressCircleProps = {
 
 export default function ProgressCircle({
   progress,
-  // widthPercent = 80,
-  // heightPercent = 40,
-  width = 80,
-  height = 40,
-  // strokePercent = 0.05,
+  width,
+  height,
   strokeWidth = 0.05,
   color = "#4caf50",
   backgroundColor = "#e0e0e0",
@@ -37,14 +31,7 @@ export default function ProgressCircle({
     }).start();
   }, [progress]);
 
-  const screenWidth = Dimensions.get("window").width;
-  const screenHeight = Dimensions.get("window").height;
-
-  const widthConvert = (screenWidth * width) / 100;
-  const heightConvert = (screenHeight * height) / 100;
-  const strokeWidthConvert = width * strokeWidth;
-
-  const radius = (width - strokeWidthConvert) / 2;
+  const radius = (width - strokeWidth) / 2;
   const circumference = Math.PI * radius;
 
   const strokeDashoffset = animatedValue.interpolate({
@@ -53,14 +40,19 @@ export default function ProgressCircle({
   });
 
   const d = `
-    M ${strokeWidthConvert / 2} ${heightConvert}
-    A ${radius} ${radius} 0 0 1 ${widthConvert - strokeWidthConvert / 2} ${heightConvert}
+    M ${strokeWidth / 2} ${height}
+    A ${radius} ${radius} 0 0 1 ${width - strokeWidth / 2} ${height}
   `;
 
   const AnimatedPath = Animated.createAnimatedComponent(Path);
 
   return (
-    <Svg width={widthConvert} height={heightConvert} viewBox={`0 0 ${widthConvert} ${heightConvert}`} style={style}>
+    <Svg
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      style={style}
+    >
       {/* Fondo */}
       <Path
         d={d}
@@ -73,7 +65,7 @@ export default function ProgressCircle({
       <AnimatedPath
         d={d}
         stroke={color}
-        strokeWidth={strokeWidthConvert}
+        strokeWidth={strokeWidth}
         strokeLinecap="round"
         fill="transparent"
         strokeDasharray={circumference}
