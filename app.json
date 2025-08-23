@@ -3,7 +3,7 @@
     "name": "react-native-started",
     "slug": "react-native-started",
     "version": "1.0.0",
-    "orientation": "landscape", 
+    "orientation": "landscape",
     "icon": "./assets/images/icon.png",
     "scheme": "reactnativestarted",
     "userInterfaceStyle": "automatic",
@@ -33,7 +33,8 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true

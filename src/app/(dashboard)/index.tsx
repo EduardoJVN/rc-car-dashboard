@@ -1,4 +1,4 @@
-import ProgressCircle from '@/src/components/ProgressBar';
+import Videoview from '@/src/components/VideoView';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import React from 'react';
 import { Button, Dimensions, StyleSheet, Text, View } from 'react-native';
@@ -15,22 +15,18 @@ export default function HomeScreen() {
 
             <View className='flex-1 w-full h-full bg-red-50'>
                 <View className='flex flex-row h-full'>
+
                     <View className='w-[10%] h-full bg-blue-50'>
                         <Text>Left</Text>
                     </View>
+
                     <View className='w-[80%] h-full bg-blue-100'>
-                        <Text>Center</Text>
-                        <View className='w-full bg-blue-100 h-[100px]'>
-                            <ProgressCircle progress={70}
-                                width={100}
-                                height={100}
-                                strokeWidth={0.05}
-                                color="#2196f3"
-                                backgroundColor="#ccc"
-                            />
+                        <View className='flex items-center justify-center w-full h-full'>
+                            <Videoview />
                         </View>
                         
                     </View>
+                    
                     <View className='w-[10%] h-full bg-blue-50 flex items-center justify-center'>
                         <View className='flex justify-center flex-1 w-full h-full'>
                             <Button title="AWD" onPress={() => alert('AWD')} />

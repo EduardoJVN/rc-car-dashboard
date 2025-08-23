@@ -1,39 +1,48 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import "../../global.css";
 
-import { useColorScheme } from '@/src/hooks/useColorScheme';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-
+import Videoview from '@/src/components/VideoView';
+import { StyleSheet, View } from 'react-native';
+import DefaultView from '../components/DefaultView';
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
+  if (!loaded) return null;
+
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1 , backgroundColor: 'red'}}>
       <SafeAreaProvider>
-        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme} >
-          {/* <LocationProvider> */}
-            <Stack>
-              <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
-              <Stack.Screen name="+not-found" />
-            </Stack>
-          {/* </LocationProvider> */}
-          <StatusBar style="auto" />
-        </ThemeProvider>
+        <View style={[styles.container , {'backgroundColor': 'green'}]}>
+          {/* Video de fondo */}
+          <Videoview />
+
+          {/* Contenido sobre el video */}
+          <View style={styles.overlay}>
+            <DefaultView />
+          </View>
+        </View>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  overlay: {
+    position: 'absolute', // encima del video
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 1,
+  },
+});

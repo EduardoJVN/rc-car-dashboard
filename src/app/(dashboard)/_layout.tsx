@@ -33,12 +33,18 @@ export default function DashboardLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="video"
         options={{
-          title: 'Explore',
+          title: 'Video',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
       />
     </Tabs>
   );
+//   return(
+//     <Stack screenOptions={{
+//       headerShown: false,
+//     }}>
+//     </Stack>
+//   )
 }

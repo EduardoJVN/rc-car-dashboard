@@ -1,22 +1,13 @@
+import Videoview from '@/src/components/VideoView';
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
-export default function HomeScreen() {
+export default function VideoScreen() {
   const insets = useSafeAreaInsets();
   return (
     <SafeAreaProvider style={{ flex: 1, paddingTop: insets.top }}>
         <View className='flex w-full h-full bg-blue-50'>
-            <View className='w-full h-20 bg-red-500'>
-                <Text>Header</Text>
-            </View>
-
-            <View className='flex-1 w-full bg-red-50'>
-                <Text>context aaaaa</Text>
-            </View>
-
-            <View className='w-full h-20 bg-red-100'>
-                <Text>footer</Text>
-            </View>
+            <Videoview />
         </View>
     </SafeAreaProvider>
   );
